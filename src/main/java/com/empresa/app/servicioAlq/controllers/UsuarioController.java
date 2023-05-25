@@ -8,21 +8,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.empresa.app.servicioAlq.models.entity.Autos;
-import com.empresa.app.servicioAlq.service.Autos.IAutosService;
-
+import com.empresa.app.servicioAlq.models.entity.Usuarios;
+import com.empresa.app.servicioAlq.service.Usuarios.IUsuariosService;
 @CrossOrigin
 @RestController
-@RequestMapping("/Autos")
-public class AutosControllers {
-            
+@RequestMapping("/Usuarios")
+
+public class UsuarioController {
+    
     @Autowired
-    private IAutosService autoService;
+    private IUsuariosService iUsuariosService;
 
     @GetMapping("/listar")
-    public List<Autos> getAutos() {
+    public List<Usuarios> getAlquiler() {
 
-        return autoService.findAll();
+        return iUsuariosService.findAll();
     }
 
 }

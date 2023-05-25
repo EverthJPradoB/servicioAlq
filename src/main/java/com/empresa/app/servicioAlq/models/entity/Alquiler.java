@@ -3,72 +3,99 @@ package com.empresa.app.servicioAlq.models.entity;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "alquiler")
 public class Alquiler {
 
-    private int IdAlquiler;
+    @Id
+    @Column(name = "ID_ALQUILER")
+    private String IdAlquiler;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "ID_USUARIO")
     private Usuarios IdUsuario;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "ID_AUTO")
     private Autos IdAuto;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "ID_ESTADO_ALQ")
     private EstadoAlquiler IdEstadoAlquiler;
 
+    @Column(name = "FECHA_PRES")
     private LocalDate fechaPrestamo;
 
+    @Column(name = "FECHA_DEVO")
     private LocalDate fechaDevolucion;
 
+    @Column(name = "NUM_DIAS")
     private int numDias;
 
+    @Column(name = "PRECIO")
     private double precio;
 
     // numDias * precio
-    // private double monto;
+    @Column(name = "MONTO")
+    private double monto;
 
-    private String encargado;
+    // @ManyToOne(fetch = FetchType.EAGER)
+    // @JoinColumn(name = "ID_USUARIO")
+    // private Usuarios encargado;
 
-    private String vigencia;
 
+  
     public Alquiler() {
     }
 
-    public Alquiler(int idAlquiler, Usuarios idUsuario, Autos idAuto,
-            LocalDate fechaPrestamo, LocalDate fechaDevolucion, double precio, String encargado) {
-        //
-        IdAlquiler = idAlquiler;
-        IdUsuario = idUsuario;
-        IdAuto = idAuto;
+    // public Alquiler(String idAlquiler, Usuarios idUsuario, Autos idAuto,
+    // LocalDate fechaPrestamo, LocalDate fechaDevolucion, double precio, String
+    // encargado) {
+    // //
+    // IdAlquiler = idAlquiler;
+    // IdUsuario = idUsuario;
+    // IdAuto = idAuto;
 
-        this.fechaPrestamo = fechaPrestamo;
-        this.fechaDevolucion = fechaDevolucion;
-        this.numDias = (int) ChronoUnit.DAYS.between(fechaPrestamo, fechaDevolucion);
-        this.precio = precio;
-        this.encargado = encargado;
-        this.vigencia = calcularVigencia();
-        //
-    }
+    // this.fechaPrestamo = fechaPrestamo;
+    // this.fechaDevolucion = fechaDevolucion;
+    // this.numDias = (int) ChronoUnit.DAYS.between(fechaPrestamo, fechaDevolucion);
+    // this.precio = precio;
+    // this.encargado = encargado;
+    // this.vigencia = calcularVigencia();
+    // //
+    // }
 
-    public Alquiler(int idAlquiler, Usuarios idUsuario, Autos idAuto,
-            EstadoAlquiler idEstadoAlquiler,
-            LocalDate fechaPrestamo, LocalDate fechaDevolucion, double precio, String encargado) {
-        //
-        IdAlquiler = idAlquiler;
-        IdUsuario = idUsuario;
-        IdAuto = idAuto;
-        IdEstadoAlquiler = idEstadoAlquiler;
-        this.fechaPrestamo = fechaPrestamo;
-        this.fechaDevolucion = fechaDevolucion;
-        this.numDias = (int) ChronoUnit.DAYS.between(fechaPrestamo, fechaDevolucion);
-        this.precio = precio;
-        this.encargado = encargado;
-        this.vigencia = calcularVigencia();
-        //
-    }
+    // public Alquiler(String idAlquiler, Usuarios idUsuario, Autos idAuto,
+    // EstadoAlquiler idEstadoAlquiler,
+    // LocalDate fechaPrestamo, LocalDate fechaDevolucion, double precio, String
+    // encargado) {
+    // //
+    // IdAlquiler = idAlquiler;
+    // IdUsuario = idUsuario;
+    // IdAuto = idAuto;
+    // IdEstadoAlquiler = idEstadoAlquiler;
+    // this.fechaPrestamo = fechaPrestamo;
+    // this.fechaDevolucion = fechaDevolucion;
+    // this.numDias = (int) ChronoUnit.DAYS.between(fechaPrestamo, fechaDevolucion);
+    // this.precio = precio;
+    // this.encargado = encargado;
+    // this.vigencia = calcularVigencia();
+    // //
+    // }
 
-    public int getIdAlquiler() {
+    public String getIdAlquiler() {
         return IdAlquiler;
     }
 
-    public void setIdAlquiler(int idAlquiler) {
+    public void setIdAlquiler(String idAlquiler) {
         IdAlquiler = idAlquiler;
     }
 
@@ -120,20 +147,6 @@ public class Alquiler {
         this.precio = precio;
     }
 
-    public String getEncargado() {
-        return encargado;
-    }
-
-    public void setEncargado(String encargado) {
-        this.encargado = encargado;
-    }
-
-    /// solo gets
-
-    public String getVigencia() {
-        return vigencia;
-    }
-
     public int getNumDias() {
         return numDias;
     }
@@ -152,5 +165,25 @@ public class Alquiler {
         }
 
     }
+
+    public void setNumDias(int numDias) {
+        this.numDias = numDias;
+    }
+
+    public double getMonto() {
+        return monto;
+    }
+
+    public void setMonto(double monto) {
+        this.monto = monto;
+    }
+
+    // public Usuarios getEncargado() {
+    // return encargado;
+    // }
+
+    // public void setEncargado(Usuarios encargado) {
+    // this.encargado = encargado;
+    // }
 
 }

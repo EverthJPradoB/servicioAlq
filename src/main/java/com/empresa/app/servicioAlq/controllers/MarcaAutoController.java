@@ -18,8 +18,6 @@ public class MarcaAutoController {
 
     @Autowired
     private IMarcaAutoService  autoService;
-
-
     
     @GetMapping("/listar")
     public List<MarcaAuto> getAlquiler() {
